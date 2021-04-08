@@ -63,16 +63,13 @@ namespace EarlyCommunityUpgrades
 		}
 
 		/// <summary>
-		/// Forces invalidation of Strings/Locations on entering Robin's house.
+		/// Forces invalidation of Strings/Locations.
 		/// This prevents cached values from being used if the player has changed config options or locales.
 		/// </summary>
 		/// <param name="args" />
-		public void ReloadI18n(WarpedEventArgs args)
+		public void ReloadI18n()
 		{
-			if (args.NewLocation.Equals(Game1.getLocationFromName("ScienceHouse")))
-			{
-				Globals.Helper.Content.InvalidateCache("Strings/Locations");
-			}
+			Globals.Helper.Content.InvalidateCache("Strings/Locations");
 		}
 	}
 }

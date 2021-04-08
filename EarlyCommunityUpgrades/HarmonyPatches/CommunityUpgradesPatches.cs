@@ -15,6 +15,8 @@ namespace EarlyCommunityUpgrades
 	{
 
 		public static bool customRequirementsMet = false;
+		private static bool pamsHouseBuilt;
+		private static bool shortcutsBuilt;
 
 		///<summary>
 		///Attempts to Harmony patch the following:
@@ -104,7 +106,7 @@ namespace EarlyCommunityUpgrades
 							{
 								if (!Game1.MasterPlayer.mailReceived.Contains("pamHouseUpgrade"))
 									options.Add(new Response("CommunityUpgrade", Game1.content.LoadString("Strings\\Locations:ScienceHouse_CarpenterMenu_CommunityUpgrade")));
-								
+
 								else if (!Game1.MasterPlayer.mailReceived.Contains("communityUpgradeShortcuts"))
 									options.Add(new Response("CommunityUpgrade", Game1.content.LoadString("Strings\\Locations:ScienceHouse_CarpenterMenu_CommunityUpgrade")));
 							}
@@ -113,7 +115,7 @@ namespace EarlyCommunityUpgrades
 							{
 								if (Game1.IsMasterGame)
 									options.Add(new Response("Renovate", Game1.content.LoadString("Strings\\Locations:ScienceHouse_CarpenterMenu_RenovateHouse")));
-								
+
 								else
 									options.Add(new Response("Renovate", Game1.content.LoadString("Strings\\Locations:ScienceHouse_CarpenterMenu_RenovateCabin")));
 							}
@@ -125,7 +127,7 @@ namespace EarlyCommunityUpgrades
 						}
 						else
 							Game1.activeClickableMenu = new ShopMenu(Utility.getCarpenterStock(), 0, "Robin");
-						
+
 						return false;
 					}
 					if (__instance.getCharacterFromName("Robin") == null && Game1.IsVisitingIslandToday("Robin"))
@@ -181,10 +183,10 @@ namespace EarlyCommunityUpgrades
 					}
 					else if (Game1.player.Money < Globals.Config.Costs.pamCostGold)
 						Game1.drawObjectDialogue(Game1.content.LoadString("Strings\\UI:NotEnoughMoney3"));
-					
+
 					else
 						Game1.drawObjectDialogue(Game1.content.LoadString("Strings\\Locations:ScienceHouse_Carpenter_NotEnoughWood3"));
-					
+
 				}
 				else if (!Game1.MasterPlayer.mailReceived.Contains("communityUpgradeShortcuts"))
 				{
@@ -198,7 +200,7 @@ namespace EarlyCommunityUpgrades
 					}
 					else if (Game1.player.Money < Globals.Config.Costs.shortcutCostGold)
 						Game1.drawObjectDialogue(Game1.content.LoadString("Strings\\UI:NotEnoughMoney3"));
-					
+
 				}
 
 				return false;
@@ -210,7 +212,23 @@ namespace EarlyCommunityUpgrades
 			}
 		}
 
+		public static void CheckInstantUnlocks()
+		{
+			if (pamsHouseBuilt && shortcutsBuilt) return;
 
+			if (Globals.Config.InstantUnlocks.pamsHouse && !pamsHouseBuilt)
+			{
+				Game1.MasterPlayer.mailReceived.Add("pamHouseUpgrade");
+				Game1.player.eventsSeen.Add(611173);
+				pamsHouseBuilt = true;
+			}
+
+			if (Globals.Config.InstantUnlocks.shortcuts && !shortcutsBuilt)
+			{
+				Game1.MasterPlayer.mailReceived.Add("communityUpgradeShortcuts");
+				shortcutsBuilt = true;
+			}
+		}
 
 	}
 }

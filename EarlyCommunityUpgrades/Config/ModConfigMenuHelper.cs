@@ -80,6 +80,19 @@ namespace EarlyCommunityUpgrades
 				(string var) => Globals.Config.Requirements.numFriendshipHeartsGained = int.Parse(var.Replace(" (Vanilla)", "")),
 				numFriendshipHeartsGainedOptions
 			);
+
+			AddLabel("Instant Unlock");
+			AddParagraph("This will override the costs/requirements options above. The upgrade will be unlocked from the very beginning of the game. You will not receive the friendship points from Pam if you choose to unlock her house from the start.");
+
+			AddCheckBox("Pam's House", "Unlocks Pam's house from the start.",
+				() => Globals.Config.InstantUnlocks.pamsHouse,
+				(bool var) => Globals.Config.InstantUnlocks.pamsHouse = var
+				);
+
+			AddCheckBox("Shortcuts", "This will unlock the shortcuts around the valley from the start.",
+				() => Globals.Config.InstantUnlocks.shortcuts,
+				(bool var) => Globals.Config.InstantUnlocks.shortcuts = var
+				);
 		}
 
 		private static void AddLabel(string name, string desc = "")

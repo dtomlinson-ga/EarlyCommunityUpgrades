@@ -8,6 +8,7 @@
 
 		public CostsConfig Costs = new CostsConfig();
 		public RequirementsConfig Requirements = new RequirementsConfig();
+		public InstantUnlocksConfig InstantUnlocks = new InstantUnlocksConfig();
 
 		public class CostsConfig
 		{
@@ -21,6 +22,12 @@
 			public int numFarmhouseUpgrades = 3;
 			public int numRoomsCompleted = 6;
 			public int numFriendshipHeartsGained = 0;
+		}
+
+		public class InstantUnlocksConfig
+		{
+			public bool pamsHouse;
+			public bool shortcuts;
 		}
 	}
 }
