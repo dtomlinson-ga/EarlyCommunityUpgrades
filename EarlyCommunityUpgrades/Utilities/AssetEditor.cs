@@ -1,6 +1,4 @@
 ﻿using StardewModdingAPI;
-using StardewModdingAPI.Events;
-using StardewValley;
 using System.Collections.Generic;
 using System.Globalization;
 
