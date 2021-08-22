@@ -6,10 +6,15 @@
 	public class ModConfig
 	{
 
+		public OrderConfig Order = new OrderConfig();
 		public CostsConfig Costs = new CostsConfig();
 		public RequirementsConfig Requirements = new RequirementsConfig();
 		public InstantUnlocksConfig InstantUnlocks = new InstantUnlocksConfig();
 
+		public class OrderConfig
+		{
+			public bool shortcutsFirst = false;
+		}
 		public class CostsConfig
 		{
 			public int pamCostGold = 500000;
@@ -26,8 +31,8 @@
 
 		public class InstantUnlocksConfig
 		{
-			public bool pamsHouse;
-			public bool shortcuts;
+			public bool pamsHouse = false;
+			public bool shortcuts = false;
 		}
 	}
 }

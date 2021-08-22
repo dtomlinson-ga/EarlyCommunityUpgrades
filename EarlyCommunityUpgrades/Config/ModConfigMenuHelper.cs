@@ -51,6 +51,12 @@ namespace EarlyCommunityUpgrades
 
 			AddParagraph("Note: You may need to scroll to see all options in some drop-down menus.");
 
+			AddLabel("Order");
+			AddCheckBox("Shortcuts First", "Complete shortcuts before building Pam's house",
+				() => Globals.Config.Order.shortcutsFirst,
+				(bool var) => Globals.Config.Order.shortcutsFirst = var
+			);
+
 			AddLabel("Costs");
 			AddDropdown("Money Needed For Pam's House", "The amount of money Robin requires to build Pam's new house",
 				() => Globals.Config.Costs.pamCostGold.ToString(),
@@ -95,12 +101,12 @@ namespace EarlyCommunityUpgrades
 			AddCheckBox("Pam's House", "Unlocks Pam's house from the start.",
 				() => Globals.Config.InstantUnlocks.pamsHouse,
 				(bool var) => Globals.Config.InstantUnlocks.pamsHouse = var
-				);
+			);
 
 			AddCheckBox("Shortcuts", "This will unlock the shortcuts around the valley from the start.",
 				() => Globals.Config.InstantUnlocks.shortcuts,
 				(bool var) => Globals.Config.InstantUnlocks.shortcuts = var
-				);
+			);
 		}
 
 		private static void AddLabel(string name, string desc = "")
