@@ -95,6 +95,14 @@ namespace EarlyCommunityUpgrades
 				numFriendshipHeartsGainedOptions
 			);
 
+			AddLabel("Time");
+			AddIntSlider("Number of Days Required", "The numbers of days to pass before the community upgrade is completed.",
+				() => Globals.Config.Time.daysUntilCommunityUpgrade,
+				(int var) => Globals.Config.Time.daysUntilCommunityUpgrade = var,
+				1,
+				28
+			);
+
 			AddLabel("Instant Unlock");
 			AddParagraph("This will override the costs/requirements options above. The upgrade will be unlocked from the very beginning of the game. You will not receive the friendship points from Pam if you choose to unlock her house from the start.");
 
@@ -127,6 +135,11 @@ namespace EarlyCommunityUpgrades
 		private static void AddCheckBox(string name, string desc, Func<bool> get, Action<bool> set)
 		{
 			api.RegisterSimpleOption(Globals.Manifest, name, desc, get, set);
+		}
+
+		private static void AddIntSlider(string name, string desc, Func<int> get, Action<int> set, int min, int max)
+		{
+			api.RegisterClampedOption(Globals.Manifest, name, desc, get, set, min, max);
 		}
 	}
 }

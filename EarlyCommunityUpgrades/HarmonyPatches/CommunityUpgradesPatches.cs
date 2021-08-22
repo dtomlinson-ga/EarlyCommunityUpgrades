@@ -97,9 +97,11 @@ namespace EarlyCommunityUpgrades
 				int houseUpgradeLevel = Game1.MasterPlayer.houseUpgradeLevel.Value;
 				int friendshipHeartsGained = Game1.player.friendshipData.Any() ? Game1.player.friendshipData.Keys.Sum(name => Game1.player.getFriendshipHeartLevelForNPC(name)) : 0;
 
+				// make sure custom requirements are met and also that there isn't currently upgrade in progress
 				customRequirementsMet = numRoomsCompleted >= Globals.Config.Requirements.numRoomsCompleted &&
 					houseUpgradeLevel >= Globals.Config.Requirements.numFarmhouseUpgrades &&
-					friendshipHeartsGained >= Globals.Config.Requirements.numFriendshipHeartsGained;
+					friendshipHeartsGained >= Globals.Config.Requirements.numFriendshipHeartsGained &&
+					(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value <= 0;
 
 				if (Game1.player.currentUpgrade == null)
 				{
@@ -282,7 +284,7 @@ namespace EarlyCommunityUpgrades
 							Game1.player.removeItemsFromInventory(388, Globals.Config.Costs.pamCostWood);
 							Game1.getCharacterFromName("Robin").setNewDialogue(Game1.content.LoadString("Data\\ExtraDialogue:Robin_PamUpgrade_Accepted"));
 							Game1.drawDialogue(Game1.getCharacterFromName("Robin"));
-							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = 3;
+							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = Globals.Config.Time.daysUntilCommunityUpgrade;
 							multiplayer.globalChatInfoMessage("CommunityUpgrade", Game1.player.Name);
 						}
 						else if (Game1.player.Money < Globals.Config.Costs.pamCostGold)
@@ -299,7 +301,7 @@ namespace EarlyCommunityUpgrades
 							Game1.player.Money -= Globals.Config.Costs.shortcutCostGold;
 							Game1.getCharacterFromName("Robin").setNewDialogue(Game1.content.LoadString("Data\\ExtraDialogue:Robin_HouseUpgrade_Accepted"));
 							Game1.drawDialogue(Game1.getCharacterFromName("Robin"));
-							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = 3;
+							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = Globals.Config.Time.daysUntilCommunityUpgrade;
 							multiplayer.globalChatInfoMessage("CommunityUpgrade", Game1.player.Name);
 						}
 						else if (Game1.player.Money < Globals.Config.Costs.shortcutCostGold)
@@ -316,7 +318,7 @@ namespace EarlyCommunityUpgrades
 							Game1.player.Money -= Globals.Config.Costs.shortcutCostGold;
 							Game1.getCharacterFromName("Robin").setNewDialogue(Game1.content.LoadString("Data\\ExtraDialogue:Robin_HouseUpgrade_Accepted"));
 							Game1.drawDialogue(Game1.getCharacterFromName("Robin"));
-							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = 3;
+							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = Globals.Config.Time.daysUntilCommunityUpgrade;
 							multiplayer.globalChatInfoMessage("CommunityUpgrade", Game1.player.Name);
 						}
 						else if (Game1.player.Money < Globals.Config.Costs.shortcutCostGold)
@@ -330,7 +332,7 @@ namespace EarlyCommunityUpgrades
 							Game1.player.removeItemsFromInventory(388, Globals.Config.Costs.pamCostWood);
 							Game1.getCharacterFromName("Robin").setNewDialogue(Game1.content.LoadString("Data\\ExtraDialogue:Robin_PamUpgrade_Accepted"));
 							Game1.drawDialogue(Game1.getCharacterFromName("Robin"));
-							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = 3;
+							(Game1.getLocationFromName("Town") as Town).daysUntilCommunityUpgrade.Value = Globals.Config.Time.daysUntilCommunityUpgrade;
 							multiplayer.globalChatInfoMessage("CommunityUpgrade", Game1.player.Name);
 						}
 						else if (Game1.player.Money < Globals.Config.Costs.pamCostGold)
