@@ -1,7 +1,7 @@
 {
   "Name": "Early Community Upgrades",
   "Author": "Vertigon",
-  "Version": "0.2.0",
+  "Version": "0.3.0",
   "Description": "Configurable mod to lower the requirements of the community upgrades.",
   "UniqueID": "Vertigon.EarlyCommunityUpgrades",
   "EntryDll": "EarlyCommunityUpgrades.dll",
